@@ -1,30 +1,29 @@
-# Kegiatan B
 class Buku:
     def __init__(self, judul, status="tersedia"):
-        self.judul = judul
+        self.title = judul
         self.status = status
 
     def __str__(self):
-        return self.judul
+        return self.title
 
 
 def tambah_buku(buku, daftar_buku):
     return daftar_buku + [buku]
 
 
-def pinjam_buku(judul, daftar_buku):
+def pinjam_buku(title, daftar_buku):
     def update_buku(buku):
-        if buku.judul == judul and buku.status == "tersedia":
-            return Buku(buku.judul, "dipinjam")
+        if buku.judul == title and buku.status == "tersedia":
+            return Buku(buku.title, "dipinjam")
         return buku
 
     return list(map(update_buku, daftar_buku))
 
 
-def kembalikan_buku(judul, daftar_buku):
+def kembalikan_buku(title, daftar_buku):
     def update_buku(buku):
-        if buku.judul == judul and buku.status == "dipinjam":
-            return Buku(buku.judul, "tersedia")
+        if buku.title == title and buku.status == "dipinjam":
+            return Buku(buku.title, "tersedia")
         return buku
 
     return list(map(update_buku, daftar_buku))
@@ -32,7 +31,7 @@ def kembalikan_buku(judul, daftar_buku):
 
 def tampilkan_buku(daftar_buku):
     for buku in daftar_buku:
-        print(f"{buku.judul} ({buku.status})")
+        print(f"{buku.title} ({buku.status})")
 
 
 def main():
@@ -49,17 +48,17 @@ def main():
         pilihan = input("Masukkan pilihan Anda: ")
 
         if pilihan == "1":
-            judul = input("Masukkan judul buku: ")
-            buku_baru = Buku(judul)
+            title = input("Masukkan judul buku: ")
+            buku_baru = Buku(title)
             daftar_buku = tambah_buku(buku_baru, daftar_buku)
 
         elif pilihan == "2":
-            judul = input("Masukkan judul buku yang ingin dipinjam: ")
-            daftar_buku = pinjam_buku(judul, daftar_buku)
+            title = input("Masukkan judul buku yang ingin dipinjam: ")
+            daftar_buku = pinjam_buku(title, daftar_buku)
 
         elif pilihan == "3":
-            judul = input("Masukkan judul buku yang ingin dikembalikan: ")
-            daftar_buku = kembalikan_buku(judul, daftar_buku)
+            title = input("Masukkan judul buku yang ingin dikembalikan: ")
+            daftar_buku = kembalikan_buku(title, daftar_buku)
 
         elif pilihan == "4":
             tampilkan_buku(daftar_buku)
